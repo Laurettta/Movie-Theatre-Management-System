@@ -1,0 +1,51 @@
+package com.mtm.Movie.Theatre.Management.API.controller;
+
+import com.mtm.Movie.Theatre.Management.API.dto.TheatreRequestDto;
+import com.mtm.Movie.Theatre.Management.API.dto.TheatreResponseDto;
+import com.mtm.Movie.Theatre.Management.API.model.Theatre;
+import com.mtm.Movie.Theatre.Management.API.service.TheatreService;
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/theatres")
+public class TheatreController {
+
+    public TheatreController(TheatreService theatreService) {
+        this.theatreService = theatreService;
+    }
+
+    private final TheatreService theatreService;
+
+    @PostMapping("/save")
+    public TheatreResponseDto saveTheatre(@Valid @RequestBody TheatreRequestDto dto) {
+        return theatreService.saveTheatre(dto);
+    }
+
+    @GetMapping("/all")
+    public List<TheatreResponseDto> getAllTheatres(){
+        return theatreService.getAllTheatres();
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<TheatreResponseDto> getTheatreById(@PathVariable String id){
+        return theatreService.getTheatreById(id);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<TheatreResponseDto> updateTheatre(@PathVariable String id,
+                                                 @RequestBody TheatreRequestDto dto){
+        return theatreService.updateTheatre(id,dto);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Object> deleteTheatre(@PathVariable String id){
+        return theatreService.deleteTheatre(id);
+    }
+}
