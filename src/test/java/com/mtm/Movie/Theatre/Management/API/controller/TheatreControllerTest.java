@@ -1,7 +1,7 @@
 package com.mtm.Movie.Theatre.Management.API.controller;
 
-import com.mtm.Movie.Theatre.Management.API.dto.TheatreRequestDto;
-import com.mtm.Movie.Theatre.Management.API.dto.TheatreResponseDto;
+import com.mtm.Movie.Theatre.Management.API.dto.request.TheatreRequestDto;
+import com.mtm.Movie.Theatre.Management.API.dto.response.TheatreResponseDto;
 import com.mtm.Movie.Theatre.Management.API.service.TheatreService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

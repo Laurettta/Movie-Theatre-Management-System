@@ -1,4 +1,4 @@
-package com.mtm.Movie.Theatre.Management.API.dto;
+package com.mtm.Movie.Theatre.Management.API.dto.request;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;

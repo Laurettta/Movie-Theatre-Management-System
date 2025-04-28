@@ -1,7 +1,7 @@
 package com.mtm.Movie.Theatre.Management.API.service.impl;
 
-import com.mtm.Movie.Theatre.Management.API.dto.ShowtimeRequestDto;
-import com.mtm.Movie.Theatre.Management.API.dto.ShowtimeResponseDto;
+import com.mtm.Movie.Theatre.Management.API.dto.request.ShowtimeRequestDto;
+import com.mtm.Movie.Theatre.Management.API.dto.response.ShowtimeResponseDto;
 import com.mtm.Movie.Theatre.Management.API.exception.ShowtimeNotFoundException;
 import com.mtm.Movie.Theatre.Management.API.mapper.ShowtimeMapper;
 import com.mtm.Movie.Theatre.Management.API.model.Showtime;

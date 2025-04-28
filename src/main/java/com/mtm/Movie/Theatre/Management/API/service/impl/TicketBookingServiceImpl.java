@@ -1,14 +1,13 @@
 package com.mtm.Movie.Theatre.Management.API.service.impl;
 
-import com.mtm.Movie.Theatre.Management.API.dto.TicketBookingRequestDto;
-import com.mtm.Movie.Theatre.Management.API.dto.TicketBookingResponseDto;
+import com.mtm.Movie.Theatre.Management.API.dto.request.TicketBookingRequestDto;
+import com.mtm.Movie.Theatre.Management.API.dto.response.TicketBookingResponseDto;
 import com.mtm.Movie.Theatre.Management.API.exception.TicketBookingNotFoundException;
 import com.mtm.Movie.Theatre.Management.API.mapper.TicketBookingMapper;
 import com.mtm.Movie.Theatre.Management.API.model.TicketBooking;
 import com.mtm.Movie.Theatre.Management.API.repository.TicketBookingRepository;
 import com.mtm.Movie.Theatre.Management.API.service.TicketBookingService;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 

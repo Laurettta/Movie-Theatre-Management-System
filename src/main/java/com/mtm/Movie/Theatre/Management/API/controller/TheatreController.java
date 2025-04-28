@@ -1,13 +1,9 @@
 package com.mtm.Movie.Theatre.Management.API.controller;
 
-import com.mtm.Movie.Theatre.Management.API.dto.TheatreRequestDto;
-import com.mtm.Movie.Theatre.Management.API.dto.TheatreResponseDto;
-import com.mtm.Movie.Theatre.Management.API.model.Theatre;
+import com.mtm.Movie.Theatre.Management.API.dto.request.TheatreRequestDto;
+import com.mtm.Movie.Theatre.Management.API.dto.response.TheatreResponseDto;
 import com.mtm.Movie.Theatre.Management.API.service.TheatreService;
 import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

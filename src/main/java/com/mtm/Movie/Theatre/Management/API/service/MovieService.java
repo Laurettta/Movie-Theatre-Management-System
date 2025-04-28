@@ -1,8 +1,7 @@
 package com.mtm.Movie.Theatre.Management.API.service;
 
-import com.mtm.Movie.Theatre.Management.API.dto.MovieRequestDto;
-import com.mtm.Movie.Theatre.Management.API.dto.MovieResponseDto;
-import com.mtm.Movie.Theatre.Management.API.model.Movie;
+import com.mtm.Movie.Theatre.Management.API.dto.request.MovieRequestDto;
+import com.mtm.Movie.Theatre.Management.API.dto.response.MovieResponseDto;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 

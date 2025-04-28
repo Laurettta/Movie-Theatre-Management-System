@@ -1,7 +1,7 @@
 package com.mtm.Movie.Theatre.Management.API.service.impl;
 
-import com.mtm.Movie.Theatre.Management.API.dto.MovieRequestDto;
-import com.mtm.Movie.Theatre.Management.API.dto.MovieResponseDto;
+import com.mtm.Movie.Theatre.Management.API.dto.request.MovieRequestDto;
+import com.mtm.Movie.Theatre.Management.API.dto.response.MovieResponseDto;
 import com.mtm.Movie.Theatre.Management.API.exception.MovieNotFoundException;
 import com.mtm.Movie.Theatre.Management.API.mapper.MovieMapper;
 import com.mtm.Movie.Theatre.Management.API.model.Movie;
