@@ -1,7 +1,7 @@
 package com.mtm.Movie.Theatre.Management.API.service.impl;
 
-import com.mtm.Movie.Theatre.Management.API.dto.TicketBookingRequestDto;
-import com.mtm.Movie.Theatre.Management.API.dto.TicketBookingResponseDto;
+import com.mtm.Movie.Theatre.Management.API.dto.request.TicketBookingRequestDto;
+import com.mtm.Movie.Theatre.Management.API.dto.response.TicketBookingResponseDto;
 import com.mtm.Movie.Theatre.Management.API.exception.TicketBookingNotFoundException;
 import com.mtm.Movie.Theatre.Management.API.mapper.TicketBookingMapper;
 import com.mtm.Movie.Theatre.Management.API.model.TicketBooking;

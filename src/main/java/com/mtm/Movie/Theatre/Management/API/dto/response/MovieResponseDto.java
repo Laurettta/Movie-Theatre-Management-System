@@ -1,4 +1,4 @@
-package com.mtm.Movie.Theatre.Management.API.dto;
+package com.mtm.Movie.Theatre.Management.API.dto.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

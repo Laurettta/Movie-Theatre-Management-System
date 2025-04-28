@@ -1,6 +1,6 @@
 package com.mtm.Movie.Theatre.Management.API.exception;
 
-import com.mtm.Movie.Theatre.Management.API.dto.ErrorResponseDto;
+import com.mtm.Movie.Theatre.Management.API.dto.response.ErrorResponseDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -19,8 +19,8 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(responseDto, HttpStatus.NOT_FOUND);
     }
 
-    @ExceptionHandler(UsernameNotFoundException.class)
-    public final ResponseEntity<Object> handleUsernameNotFoundException(UsernameNotFoundException exception, WebRequest request){
+    @ExceptionHandler(UserNotFoundException.class)
+    public final ResponseEntity<Object> handleUsernameNotFoundException(UserNotFoundException exception, WebRequest request){
         ErrorResponseDto responseDto = new ErrorResponseDto(exception.getMessage(), String.format("Path is %s", request.getDescription(false)), LocalDateTime.now());
         return new ResponseEntity<>(responseDto, HttpStatus.NOT_FOUND);
     }
@@ -41,5 +41,11 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
     public final ResponseEntity<Object> handleTicketBookingNotFoundException(TicketBookingNotFoundException exception, WebRequest request){
         ErrorResponseDto responseDto = new ErrorResponseDto(exception.getMessage(), String.format("Path is %s", request.getDescription(false)), LocalDateTime.now());
         return new ResponseEntity<>(responseDto, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(BadRequestException.class)
+    public final ResponseEntity<Object> handleBadRequestException(BadRequestException exception, WebRequest request){
+        ErrorResponseDto responseDto = new ErrorResponseDto(exception.getMessage(), String.format("Path is %s", request.getDescription(false)), LocalDateTime.now());
+        return new ResponseEntity<>(responseDto, HttpStatus.BAD_REQUEST);
     }
 }

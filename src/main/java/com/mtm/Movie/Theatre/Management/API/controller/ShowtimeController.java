@@ -1,13 +1,9 @@
 package com.mtm.Movie.Theatre.Management.API.controller;
 
-import com.mtm.Movie.Theatre.Management.API.dto.ShowtimeRequestDto;
-import com.mtm.Movie.Theatre.Management.API.dto.ShowtimeResponseDto;
-import com.mtm.Movie.Theatre.Management.API.model.Showtime;
-import com.mtm.Movie.Theatre.Management.API.model.Theatre;
+import com.mtm.Movie.Theatre.Management.API.dto.request.ShowtimeRequestDto;
+import com.mtm.Movie.Theatre.Management.API.dto.response.ShowtimeResponseDto;
 import com.mtm.Movie.Theatre.Management.API.service.ShowtimeService;
 import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

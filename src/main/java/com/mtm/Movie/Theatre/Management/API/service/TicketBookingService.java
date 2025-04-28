@@ -1,8 +1,7 @@
 package com.mtm.Movie.Theatre.Management.API.service;
 
-import com.mtm.Movie.Theatre.Management.API.dto.TicketBookingRequestDto;
-import com.mtm.Movie.Theatre.Management.API.dto.TicketBookingResponseDto;
-import com.mtm.Movie.Theatre.Management.API.model.TicketBooking;
+import com.mtm.Movie.Theatre.Management.API.dto.request.TicketBookingRequestDto;
+import com.mtm.Movie.Theatre.Management.API.dto.response.TicketBookingResponseDto;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;

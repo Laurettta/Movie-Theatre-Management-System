@@ -1,8 +1,7 @@
 package com.mtm.Movie.Theatre.Management.API.service;
 
-import com.mtm.Movie.Theatre.Management.API.dto.ShowtimeRequestDto;
-import com.mtm.Movie.Theatre.Management.API.dto.ShowtimeResponseDto;
-import com.mtm.Movie.Theatre.Management.API.model.Showtime;
+import com.mtm.Movie.Theatre.Management.API.dto.request.ShowtimeRequestDto;
+import com.mtm.Movie.Theatre.Management.API.dto.response.ShowtimeResponseDto;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;

@@ -1,7 +1,7 @@
 package com.mtm.Movie.Theatre.Management.API.mapper;
 
-import com.mtm.Movie.Theatre.Management.API.dto.MovieRequestDto;
-import com.mtm.Movie.Theatre.Management.API.dto.MovieResponseDto;
+import com.mtm.Movie.Theatre.Management.API.dto.request.MovieRequestDto;
+import com.mtm.Movie.Theatre.Management.API.dto.response.MovieResponseDto;
 import com.mtm.Movie.Theatre.Management.API.model.Movie;
 import org.springframework.stereotype.Component;
 
