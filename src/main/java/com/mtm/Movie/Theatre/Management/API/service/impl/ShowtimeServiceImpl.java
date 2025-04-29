@@ -2,6 +2,7 @@ package com.mtm.Movie.Theatre.Management.API.service.impl;
 
 import com.mtm.Movie.Theatre.Management.API.dto.request.ShowtimeRequestDto;
 import com.mtm.Movie.Theatre.Management.API.dto.response.ShowtimeResponseDto;
+import com.mtm.Movie.Theatre.Management.API.exception.AccessDeniedException;
 import com.mtm.Movie.Theatre.Management.API.exception.ShowtimeNotFoundException;
 import com.mtm.Movie.Theatre.Management.API.mapper.ShowtimeMapper;
 import com.mtm.Movie.Theatre.Management.API.model.Showtime;
@@ -9,6 +10,7 @@ import com.mtm.Movie.Theatre.Management.API.repository.ShowtimeRepository;
 import com.mtm.Movie.Theatre.Management.API.service.ShowtimeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,14 +19,21 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ShowtimeServiceImpl implements ShowtimeService {
 
-
     private final ShowtimeRepository showtimeRepository;
-
     private final ShowtimeMapper showtimeMapper;
+
+    private void checkIfAdmin() {
+        var authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication == null || authentication.getAuthorities().stream()
+                .noneMatch(auth -> auth.getAuthority().equals("ROLE_ADMIN"))) {
+            throw new AccessDeniedException("Access denied: you are not allowed to perform this action.");
+        }
+    }
 
     @Override
     public ShowtimeResponseDto saveShowtime(ShowtimeRequestDto dto)
     {
+        checkIfAdmin();
         Showtime showtime = showtimeMapper.fromDto(dto);
         return showtimeMapper.fromShowtime(showtimeRepository.save(showtime));
     }
@@ -43,6 +52,7 @@ public class ShowtimeServiceImpl implements ShowtimeService {
 
     @Override
     public ResponseEntity<Object> deleteShowtimeById(String id) {
+        checkIfAdmin();
         return showtimeRepository.findById(id)
                 .map(showtime -> {
                     showtimeRepository.deleteById(id);

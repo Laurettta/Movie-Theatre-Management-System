@@ -2,6 +2,7 @@ package com.mtm.Movie.Theatre.Management.API.service.impl;
 
 import com.mtm.Movie.Theatre.Management.API.dto.request.MovieRequestDto;
 import com.mtm.Movie.Theatre.Management.API.dto.response.MovieResponseDto;
+import com.mtm.Movie.Theatre.Management.API.exception.AccessDeniedException;
 import com.mtm.Movie.Theatre.Management.API.exception.MovieNotFoundException;
 import com.mtm.Movie.Theatre.Management.API.mapper.MovieMapper;
 import com.mtm.Movie.Theatre.Management.API.model.Movie;
@@ -12,6 +13,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,9 +26,17 @@ public class MovieServiceImpl implements MovieService {
 
     private final MovieMapper movieMapper;
 
+    private void checkIfAdmin() {
+        var authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication == null || authentication.getAuthorities().stream()
+                .noneMatch(auth -> auth.getAuthority().equals("ROLE_ADMIN"))) {
+            throw new AccessDeniedException("Access denied: you are not allowed to perform this action.");
+        }
+    }
 
     @Override
     public MovieResponseDto saveMovie(MovieRequestDto dto) {
+        checkIfAdmin();
         Movie movie = movieMapper.fromDto(dto);
         return movieMapper.fromMovie(movieRepository.save(movie));
     }
@@ -52,6 +62,7 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public ResponseEntity<MovieResponseDto> updateMovie(String id, MovieRequestDto dto) {
+        checkIfAdmin();
         return movieRepository.findById(id)
                 .map(existing -> {
                     existing.setTitle(dto.getTitle());
@@ -66,6 +77,7 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public ResponseEntity<Object> deleteMovie(String id) {
+        checkIfAdmin();
         return movieRepository.findById(id)
                 .map(movie -> {
                     movieRepository.deleteById(id);
