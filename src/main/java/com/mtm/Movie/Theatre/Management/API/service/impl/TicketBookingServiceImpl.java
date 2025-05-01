@@ -10,6 +10,7 @@ import com.mtm.Movie.Theatre.Management.API.repository.TicketBookingRepository;
 import com.mtm.Movie.Theatre.Management.API.service.TicketBookingService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
@@ -22,17 +23,20 @@ public class TicketBookingServiceImpl implements TicketBookingService {
     private final TicketBookingRepository ticketBookingRepository;
     private final TicketBookingMapper ticketBookingMapper;
 
+    @PreAuthorize("hasRole('ADMIN')")
     @Override
     public TicketBookingResponseDto saveBookings(TicketBookingRequestDto dto) {
         TicketBooking ticketBooking = ticketBookingMapper.fromDto(dto);
         return ticketBookingMapper.fromTicketBooking(ticketBookingRepository.save(ticketBooking));
     }
 
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     @Override
     public List<TicketBookingResponseDto> getAllBookings() {
         return ticketBookingMapper.toDtoList(ticketBookingRepository.findAll());
     }
 
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     @Override
     public ResponseEntity<List<TicketBookingResponseDto>> getBookingsByUserId(String userId) {
         List<TicketBooking> bookings = ticketBookingRepository.findByUserId(userId);
@@ -43,6 +47,7 @@ public class TicketBookingServiceImpl implements TicketBookingService {
         return ResponseEntity.ok(ticketBookingMapper.toDtoList(bookings));
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @Override
     public ResponseEntity<Object> deleteBookings(String id) {
         return ticketBookingRepository.findById(id)

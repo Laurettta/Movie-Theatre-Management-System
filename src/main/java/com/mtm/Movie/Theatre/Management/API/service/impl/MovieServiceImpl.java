@@ -13,7 +13,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -26,21 +26,15 @@ public class MovieServiceImpl implements MovieService {
 
     private final MovieMapper movieMapper;
 
-    private void checkIfAdmin() {
-        var authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication == null || authentication.getAuthorities().stream()
-                .noneMatch(auth -> auth.getAuthority().equals("ROLE_ADMIN"))) {
-            throw new AccessDeniedException("Access denied: you are not allowed to perform this action.");
-        }
-    }
-
+    // Only accessible by ADMINs
+    @PreAuthorize("hasRole('ADMIN')")
     @Override
     public MovieResponseDto saveMovie(MovieRequestDto dto) {
-        checkIfAdmin();
         Movie movie = movieMapper.fromDto(dto);
         return movieMapper.fromMovie(movieRepository.save(movie));
     }
 
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     @Override
     public Page<MovieResponseDto> getMovies(int page, int size) {
         Pageable pageable = PageRequest.of(page,size);
@@ -48,11 +42,13 @@ public class MovieServiceImpl implements MovieService {
         return moviePage.map(movieMapper::fromMovie);
     }
 
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     @Override
     public List<MovieResponseDto> getAllMovies() {
         return movieMapper.toDtoList(movieRepository.findAll());
     }
 
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     @Override
     public ResponseEntity<MovieResponseDto> getMovieById(String id) {
         return movieRepository.findById(id)
@@ -60,10 +56,10 @@ public class MovieServiceImpl implements MovieService {
                 .orElseThrow(() -> new MovieNotFoundException("movie not found"));
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @Override
     public ResponseEntity<MovieResponseDto> updateMovie(String id, MovieRequestDto dto) {
-        checkIfAdmin();
-        return movieRepository.findById(id)
+                return movieRepository.findById(id)
                 .map(existing -> {
                     existing.setTitle(dto.getTitle());
                     existing.setGenre(dto.getGenre());
@@ -75,9 +71,9 @@ public class MovieServiceImpl implements MovieService {
                 .orElseThrow(() -> new MovieNotFoundException("movie not found"));
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @Override
     public ResponseEntity<Object> deleteMovie(String id) {
-        checkIfAdmin();
         return movieRepository.findById(id)
                 .map(movie -> {
                     movieRepository.deleteById(id);

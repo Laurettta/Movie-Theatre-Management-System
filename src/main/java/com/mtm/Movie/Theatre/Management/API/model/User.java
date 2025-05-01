@@ -1,6 +1,7 @@
 package com.mtm.Movie.Theatre.Management.API.model;
 
 import com.mtm.Movie.Theatre.Management.API.enums.Role;
+import com.mtm.Movie.Theatre.Management.API.enums.UserType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -29,12 +30,20 @@ public class User implements UserDetails {
     private String email;
     private String password;
     private Role role;
-
+    private UserType userType;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(role.name()));
+        String roleName = "ROLE_" + getRole().name();
+        return List.of(new SimpleGrantedAuthority(roleName));
     }
+
+
+
+//    @Override
+//    public Collection<? extends GrantedAuthority> getAuthorities() {
+//        return List.of(new SimpleGrantedAuthority(role.name()));
+//    }
 
     @Override
     public String getUsername() {

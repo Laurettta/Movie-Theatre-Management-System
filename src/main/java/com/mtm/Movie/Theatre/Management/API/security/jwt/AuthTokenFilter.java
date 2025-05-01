@@ -1,7 +1,11 @@
 package com.mtm.Movie.Theatre.Management.API.security.jwt;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mtm.Movie.Theatre.Management.API.dto.response.ApiResponse;
+import com.mtm.Movie.Theatre.Management.API.exception.AccessDeniedException;
 import com.mtm.Movie.Theatre.Management.API.helpers.AuthHelperService;
 import com.mtm.Movie.Theatre.Management.API.service.impl.AuthServiceImpl;
 import com.mtm.Movie.Theatre.Management.API.utility.JwtUtils;
@@ -13,6 +17,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -47,6 +52,13 @@ public class AuthTokenFilter extends OncePerRequestFilter {
             }
         } catch (Exception e) {
             logger.error("Cannot set user authentication: {}", e);
+            response.setContentType("application/json");
+            response.setStatus(HttpStatus.UNAUTHORIZED.value());
+            var error = ApiResponse.builder()
+                    .code(HttpStatus.UNAUTHORIZED.value())
+                    .message("Access denied: you are not allowed to perform this action.")
+                    .build();
+            response.getWriter().write(new ObjectMapper().writeValueAsString(error));
         }
 
         filterChain.doFilter(request, response);
