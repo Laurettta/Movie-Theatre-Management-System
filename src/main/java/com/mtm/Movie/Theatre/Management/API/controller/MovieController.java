@@ -4,20 +4,18 @@ import com.mtm.Movie.Theatre.Management.API.dto.request.MovieRequestDto;
 import com.mtm.Movie.Theatre.Management.API.dto.response.MovieResponseDto;
 import com.mtm.Movie.Theatre.Management.API.service.MovieService;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("movies")
+@RequiredArgsConstructor
 public class MovieController {
-
-    public MovieController(MovieService movieService) {
-        this.movieService = movieService;
-    }
-
 
     private final MovieService movieService;
 
@@ -52,6 +50,4 @@ public class MovieController {
     public ResponseEntity<Object> deleteMovie(@PathVariable String id){
         return movieService.deleteMovie(id);
     }
-
-    
 }

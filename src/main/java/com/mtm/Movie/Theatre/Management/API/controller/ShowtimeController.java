@@ -4,19 +4,17 @@ import com.mtm.Movie.Theatre.Management.API.dto.request.ShowtimeRequestDto;
 import com.mtm.Movie.Theatre.Management.API.dto.response.ShowtimeResponseDto;
 import com.mtm.Movie.Theatre.Management.API.service.ShowtimeService;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("showtimes")
-//@RequiredArgsConstructor
+@RequiredArgsConstructor
 public class ShowtimeController {
-
-    public ShowtimeController(ShowtimeService showtimeService) {
-        this.showtimeService = showtimeService;
-    }
 
     private final ShowtimeService showtimeService;
 
