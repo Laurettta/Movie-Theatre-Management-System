@@ -2,7 +2,8 @@
 
 The Movie Theatre Management API is a fully-functional, RESTful backend service built using Spring Boot and MongoDB, designed to help manage movies, theatres, showtimes, and ticket bookings. Whether you're a developer interested in Spring Boot, MongoDB, or API design, this project is a great learning tool that also demonstrates solid software engineering practices.
 
-This project is designed to solve real-world problems while showcasing efficient backend API design, role-based security, validation, and concurrency-safe operations. If you're looking to contribute, improve your Spring Boot skills, or simply explore the world of microservices, this repository is for you!
+This project is designed to solve real-world problems while showcasing efficient backend API design, role-based security, validation, and concurrency-safe operations. If you're looking to contribute, improve your Spring Boot skills, or simply explore the world of microservices, this repository is for you.
+
 
 𝗣𝗿𝗼𝗷𝗲𝗰𝘁 𝗛𝗶𝗴𝗵𝗹𝗶𝗴𝗵𝘁𝘀
 
@@ -16,6 +17,7 @@ This project is designed to solve real-world problems while showcasing efficient
 
 • Unit Testing: Full coverage for services and controllers with JUnit and Mockito.
 
+
 𝗧𝗲𝗰𝗵 𝗦𝘁𝗮𝗰𝗸
 
 • Backend: Spring Boot
@@ -28,7 +30,9 @@ This project is designed to solve real-world problems while showcasing efficient
 
 • Version Control: Git, GitHub
 
+
 𝗙𝗲𝗮𝘁𝘂𝗿𝗲𝘀
+
 𝗠𝗼𝘃𝗶𝗲 𝗠𝗮𝗻𝗮𝗴𝗲𝗺𝗲𝗻𝘁
 Add, update, retrieve, and delete movies.
 
@@ -48,6 +52,7 @@ Retrieve showtimes for a movie or a specific theatre.
 Book and cancel tickets for a specific showtime.
 
 View all bookings or filter by user.
+
 
 𝗪𝗵𝘆 𝗧𝗵𝗶𝘀 𝗣𝗿𝗼𝗷𝗲𝗰𝘁?
 
