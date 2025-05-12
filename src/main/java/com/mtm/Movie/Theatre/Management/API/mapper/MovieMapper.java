@@ -26,7 +26,6 @@ public class MovieMapper {
                 .id(movie.getId())
                 .genre(movie.getGenre())
                 .title(movie.getTitle())
-                .releaseDate(movie.getReleaseDate())
                 .duration(movie.getDuration())
                 .build();
     }
@@ -38,7 +37,6 @@ public class MovieMapper {
                     .id(movie.getId())
                     .genre(movie.getGenre())
                     .title(movie.getTitle())
-                    .releaseDate(movie.getReleaseDate())
                     .duration(movie.getDuration())
                     .build();
             response.add(m);

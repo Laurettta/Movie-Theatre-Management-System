@@ -26,29 +26,12 @@ public class MovieServiceImpl implements MovieService {
 
     private final MovieMapper movieMapper;
 
-    // Only accessible by ADMINs
-    @PreAuthorize("hasRole('ADMIN')")
     @Override
     public MovieResponseDto saveMovie(MovieRequestDto dto) {
         Movie movie = movieMapper.fromDto(dto);
         return movieMapper.fromMovie(movieRepository.save(movie));
     }
 
-    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
-    @Override
-    public Page<MovieResponseDto> getMovies(int page, int size) {
-        Pageable pageable = PageRequest.of(page,size);
-        Page<Movie> moviePage = movieRepository.findAll(pageable);
-        return moviePage.map(movieMapper::fromMovie);
-    }
-
-    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
-    @Override
-    public List<MovieResponseDto> getAllMovies() {
-        return movieMapper.toDtoList(movieRepository.findAll());
-    }
-
-    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     @Override
     public ResponseEntity<MovieResponseDto> getMovieById(String id) {
         return movieRepository.findById(id)
@@ -56,7 +39,6 @@ public class MovieServiceImpl implements MovieService {
                 .orElseThrow(() -> new MovieNotFoundException("movie not found"));
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
     @Override
     public ResponseEntity<MovieResponseDto> updateMovie(String id, MovieRequestDto dto) {
                 return movieRepository.findById(id)
@@ -71,7 +53,19 @@ public class MovieServiceImpl implements MovieService {
                 .orElseThrow(() -> new MovieNotFoundException("movie not found"));
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+    @Override
+    public Page<MovieResponseDto> getMovies(int page, int size) {
+        Pageable pageable = PageRequest.of(page,size);
+        Page<Movie> moviePage = movieRepository.findAll(pageable);
+        return moviePage.map(movieMapper::fromMovie);
+    }
+
+    @Override
+    public List<MovieResponseDto> getAllMovies() {
+        return movieMapper.toDtoList(movieRepository.findAll());
+    }
+
+
     @Override
     public ResponseEntity<Object> deleteMovie(String id) {
         return movieRepository.findById(id)

@@ -13,18 +13,18 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("movies")
+@RequestMapping("/movies")
 @RequiredArgsConstructor
 public class MovieController {
 
     private final MovieService movieService;
 
-    @PostMapping("/save")
+    @PostMapping
     public MovieResponseDto saveMovie(@Valid @RequestBody MovieRequestDto dto){
         return movieService.saveMovie(dto);
     }
 
-    @GetMapping("/all")
+    @GetMapping
     public List<MovieResponseDto> getAllMovies(){
         return movieService.getAllMovies();
     }
@@ -34,20 +34,28 @@ public class MovieController {
         return movieService.getMovieById(id);
     }
 
-    @GetMapping("")
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
+    @GetMapping(params = {"page", "size"})
     public ResponseEntity<Page<MovieResponseDto>> getMovies(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size) {
         Page<MovieResponseDto> movies = movieService.getMovies(page, size);
         return ResponseEntity.ok(movies);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/{id}")
     public ResponseEntity<MovieResponseDto> updateMovie(@PathVariable String id,
                                                  @RequestBody MovieRequestDto dto) {
         return movieService.updateMovie(id, dto);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> deleteMovie(@PathVariable String id){
         return movieService.deleteMovie(id);
     }
+
+
+//    @PreAuthorize("hasRole('ADMIN')")
+//    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
+//    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 }
