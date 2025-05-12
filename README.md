@@ -34,24 +34,28 @@ This project is designed to solve real-world problems while showcasing efficient
 𝗙𝗲𝗮𝘁𝘂𝗿𝗲𝘀
 
 𝗠𝗼𝘃𝗶𝗲 𝗠𝗮𝗻𝗮𝗴𝗲𝗺𝗲𝗻𝘁
-Add, update, retrieve, and delete movies.
+• Add, update, retrieve, and delete movies.
 
-Each movie includes properties like title, genre, duration, and release date.
+• Each movie includes properties like title, genre, duration, and release date.
+
 
 𝗧𝗵𝗲𝗮𝘁𝗿𝗲 𝗠𝗮𝗻𝗮𝗴𝗲𝗺𝗲𝗻𝘁
-Add, update, retrieve, and delete theatres.
+• Add, update, retrieve, and delete theatres.
 
-Manage properties like name, location, and seating capacity.
+• Manage properties like name, location, and seating capacity.
+
 
 𝗦𝗵𝗼𝘄𝘁𝗶𝗺𝗲𝘀 𝗠𝗮𝗻𝗮𝗴𝗲𝗺𝗲𝗻𝘁
-Schedule new showtimes for movies in theatres.
+• Schedule new showtimes for movies in theatres.
 
-Retrieve showtimes for a movie or a specific theatre.
+• Retrieve showtimes for a movie or a specific theatre.
+
 
 𝗧𝗶𝗰𝗸𝗲𝘁 𝗕𝗼𝗼𝗸𝗶𝗻𝗴
-Book and cancel tickets for a specific showtime.
+• Book and cancel tickets for a specific showtime.
 
-View all bookings or filter by user.
+• View all bookings or filter by user.
+
 
 
 𝗪𝗵𝘆 𝗧𝗵𝗶𝘀 𝗣𝗿𝗼𝗷𝗲𝗰𝘁?
