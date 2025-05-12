@@ -19,4 +19,5 @@ public class Showtime {
     private String movieId;
     private String theatreId;
     private String showtime;
+    private int availableSeats;
 }

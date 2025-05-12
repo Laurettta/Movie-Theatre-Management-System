@@ -28,7 +28,7 @@ public class AuthHelperService implements UserDetailsService {
                 .accountLocked(false)
                 .credentialsExpired(false)
                 .disabled(false)
-                .authorities(new SimpleGrantedAuthority(user.getRole().name()))
+                .authorities(new SimpleGrantedAuthority("ROLE_"+user.getRole().name()))
                 .build();
     }
 

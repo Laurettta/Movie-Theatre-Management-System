@@ -1,6 +1,9 @@
 package com.mtm.Movie.Theatre.Management.API.dto.request;
 
+import com.mtm.Movie.Theatre.Management.API.enums.UserType;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Null;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -30,6 +33,9 @@ public class SignupRequest {
     @NotBlank
     @Size(min = 6, max = 40)
     private String password;
+
+    @NotNull(message = "Kindly enter a user type")
+    private UserType userType;
 
 
 }

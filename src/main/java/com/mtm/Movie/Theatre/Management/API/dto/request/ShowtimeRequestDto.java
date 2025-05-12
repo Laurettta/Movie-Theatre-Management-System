@@ -18,4 +18,5 @@ public class ShowtimeRequestDto {
 
     @NotBlank(message = "showtime cannot be empty")
     private String showtime;
+
 }

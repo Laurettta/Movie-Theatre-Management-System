@@ -2,6 +2,7 @@ package com.mtm.Movie.Theatre.Management.API.service.impl;
 
 import com.mtm.Movie.Theatre.Management.API.dto.request.ShowtimeRequestDto;
 import com.mtm.Movie.Theatre.Management.API.dto.response.ShowtimeResponseDto;
+import com.mtm.Movie.Theatre.Management.API.exception.AccessDeniedException;
 import com.mtm.Movie.Theatre.Management.API.exception.ShowtimeNotFoundException;
 import com.mtm.Movie.Theatre.Management.API.mapper.ShowtimeMapper;
 import com.mtm.Movie.Theatre.Management.API.model.Showtime;
@@ -9,6 +10,8 @@ import com.mtm.Movie.Theatre.Management.API.repository.ShowtimeRepository;
 import com.mtm.Movie.Theatre.Management.API.service.ShowtimeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,11 +20,10 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ShowtimeServiceImpl implements ShowtimeService {
 
-
     private final ShowtimeRepository showtimeRepository;
-
     private final ShowtimeMapper showtimeMapper;
 
+    @PreAuthorize("hasRole('ADMIN')")
     @Override
     public ShowtimeResponseDto saveShowtime(ShowtimeRequestDto dto)
     {
@@ -29,18 +31,21 @@ public class ShowtimeServiceImpl implements ShowtimeService {
         return showtimeMapper.fromShowtime(showtimeRepository.save(showtime));
     }
 
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     @Override
     public ResponseEntity<List<ShowtimeResponseDto>> getShowtimeByMovieId(String movieId) {
         List<Showtime> showtime = showtimeRepository.findByMovieId(movieId);
         return ResponseEntity.ok(showtimeMapper.toDtoList(showtime));
     }
 
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     @Override
     public ResponseEntity<List<ShowtimeResponseDto>> getShowtimeByTheatre(String theatreId) {
         List<Showtime> showtime = showtimeRepository.findByTheatreId(theatreId);
                 return ResponseEntity.ok(showtimeMapper.toDtoList(showtime));
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @Override
     public ResponseEntity<Object> deleteShowtimeById(String id) {
         return showtimeRepository.findById(id)

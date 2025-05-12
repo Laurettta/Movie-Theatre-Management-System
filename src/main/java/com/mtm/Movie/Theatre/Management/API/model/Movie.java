@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.time.LocalDate;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -19,5 +21,5 @@ public class Movie {
     private String title;
     private String genre;
     private int duration;
-    private String releaseDate;
+    private LocalDate releaseDate;
 }

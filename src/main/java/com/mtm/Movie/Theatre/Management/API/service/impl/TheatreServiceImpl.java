@@ -2,6 +2,7 @@ package com.mtm.Movie.Theatre.Management.API.service.impl;
 
 import com.mtm.Movie.Theatre.Management.API.dto.request.TheatreRequestDto;
 import com.mtm.Movie.Theatre.Management.API.dto.response.TheatreResponseDto;
+import com.mtm.Movie.Theatre.Management.API.exception.AccessDeniedException;
 import com.mtm.Movie.Theatre.Management.API.exception.TheatreNotFoundException;
 import com.mtm.Movie.Theatre.Management.API.mapper.TheatreMapper;
 import com.mtm.Movie.Theatre.Management.API.model.Theatre;
@@ -9,6 +10,8 @@ import com.mtm.Movie.Theatre.Management.API.repository.TheatreRepository;
 import com.mtm.Movie.Theatre.Management.API.service.TheatreService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,24 +21,22 @@ import java.util.List;
 public class TheatreServiceImpl implements TheatreService {
 
     private final TheatreRepository theatreRepository;
-
     private final TheatreMapper theatreMapper;
 
-//    constructor, field, setter
-
-
-
+    @PreAuthorize("hasRole('ADMIN')")
     @Override
     public TheatreResponseDto saveTheatre(TheatreRequestDto theatredto) {
         Theatre theatre = theatreMapper.fromDto(theatredto);
         return theatreMapper.fromTheatre(theatreRepository.save(theatre));
     }
 
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     @Override
     public List<TheatreResponseDto> getAllTheatres() {
         return theatreMapper.toDtoList(theatreRepository.findAll());
     }
 
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     @Override
     public ResponseEntity<TheatreResponseDto> getTheatreById(String id) {
         return theatreRepository.findById(id)
@@ -43,6 +44,7 @@ public class TheatreServiceImpl implements TheatreService {
                 .orElseThrow(() -> new TheatreNotFoundException("Theatre not found"));
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @Override
     public ResponseEntity<TheatreResponseDto> updateTheatre(String id, TheatreRequestDto dto) {
         return theatreRepository.findById(id)
@@ -57,6 +59,7 @@ public class TheatreServiceImpl implements TheatreService {
                 .orElseThrow(()-> new TheatreNotFoundException("Theatre not found"));
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @Override
     public ResponseEntity<Object> deleteTheatre(String id) {
         return theatreRepository.findById(id)
