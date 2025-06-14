@@ -5,6 +5,7 @@ import com.mtm.Movie.Theatre.Management.API.dto.request.SignupRequest;
 import com.mtm.Movie.Theatre.Management.API.dto.response.ApiResponse;
 import com.mtm.Movie.Theatre.Management.API.dto.response.JwtResponse;
 import com.mtm.Movie.Theatre.Management.API.enums.Role;
+import com.mtm.Movie.Theatre.Management.API.enums.UserType;
 import com.mtm.Movie.Theatre.Management.API.exception.BadRequestException;
 import com.mtm.Movie.Theatre.Management.API.exception.UserNotFoundException;
 import com.mtm.Movie.Theatre.Management.API.model.User;
@@ -51,7 +52,14 @@ public class AuthServiceImpl implements  AuthService {
         user.setFirstName(signupRequest.getFirstName());
         user.setLastName(signupRequest.getLastName());
         user.setPassword(passwordEncoder.encode(signupRequest.getPassword()));
-        user.setRole(Role.USER);
+
+        if(signupRequest.getUserType().equals(UserType.ADMIN)){
+            user.setUserType(UserType.ADMIN);
+            user.setRole(Role.ADMIN);
+        } else {
+            user.setUserType(UserType.USER);
+            user.setRole(Role.USER);
+        }
 
         userRepository.save(user);
         return ApiResponse.ok("signup successful");

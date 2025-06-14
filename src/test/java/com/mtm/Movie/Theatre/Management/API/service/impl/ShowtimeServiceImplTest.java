@@ -13,6 +13,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.http.ResponseEntity;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -39,9 +40,9 @@ public class ShowtimeServiceImplTest {
     void setUp() {
         MockitoAnnotations.openMocks(this);
 
-        showtime = new Showtime("1", "movie123", "theatre456", "2025-05-05T12:00");
-        requestDto = new ShowtimeRequestDto("movie123", "theatre456", "2025-05-05T12:00");
-        responseDto = new ShowtimeResponseDto("1", "movie123", "theatre456", "2025-05-05T12:00");
+        showtime = new Showtime("1", "movie123", "theatre456", LocalDateTime.parse("2025-05-05T12:00"),100);
+        requestDto = new ShowtimeRequestDto("movie123", "theatre456", LocalDateTime.parse("2025-05-05T12:00"));
+        responseDto = new ShowtimeResponseDto("1", "movie123", "theatre456",    LocalDateTime.parse("2025-05-05T12:00"));
     }
 
     @Test

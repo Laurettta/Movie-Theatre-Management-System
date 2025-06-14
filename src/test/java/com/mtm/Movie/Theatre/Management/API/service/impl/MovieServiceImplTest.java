@@ -15,6 +15,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -41,9 +43,9 @@ class MovieServiceImplTest {
     void setUp() {
         MockitoAnnotations.openMocks(this);
 
-        movie = new Movie("1", "Lion King", "Drama", 120, "2024-05-10");
-        movieRequestDto = new MovieRequestDto("Lion King", "Drama", 12, "2024-05-10");
-        movieResponseDto = new MovieResponseDto("1", "Lion King", "Drama", 120, "2024-05-10");
+        movie = new Movie("1", "Lion King", "Drama", 120, LocalDate.parse("2024-05-10"));
+        movieRequestDto = new MovieRequestDto("Lion King", "Drama", 12, LocalDate.parse("2024-05-10"));
+        movieResponseDto = new MovieResponseDto("1", "Lion King", "Drama", 120, LocalDate.parse("2024-05-10"));
     }
 
     @Test
@@ -107,9 +109,9 @@ class MovieServiceImplTest {
 
     @Test
     void updateMovie_success() {
-        MovieRequestDto updatedDto = new MovieRequestDto("Updated", "Thriller", 130, "2025-01-01");
-        Movie updatedMovie = new Movie("1", "Updated", "Thriller", 130, "2025-01-01");
-        MovieResponseDto updatedResponseDto = new MovieResponseDto("1", "Updated", "Thriller", 130, "2025-01-01");
+        MovieRequestDto updatedDto = new MovieRequestDto("Updated", "Thriller", 130, LocalDate.parse("2025-01-01"));
+        Movie updatedMovie = new Movie("1", "Updated", "Thriller", 130, LocalDate.parse("2025-01-01"));
+        MovieResponseDto updatedResponseDto = new MovieResponseDto("1", "Updated", "Thriller", 130, LocalDate.parse("2025-01-01"));
 
         when(movieRepository.findById("1")).thenReturn(Optional.of(movie));
         when(movieRepository.save(any(Movie.class))).thenReturn(updatedMovie);
@@ -124,7 +126,7 @@ class MovieServiceImplTest {
     @Test
     void updateMovie_notFound() {
         when(movieRepository.findById("404")).thenReturn(Optional.empty());
-        MovieRequestDto dto = new MovieRequestDto("Any", "Genre", 100, "2025-01-01");
+        MovieRequestDto dto = new MovieRequestDto("Any", "Genre", 100, LocalDate.parse("2025-01-01"));
 
         assertThrows(MovieNotFoundException.class, () -> movieService.updateMovie("404", dto));
     }

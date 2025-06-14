@@ -2,6 +2,7 @@ package com.mtm.Movie.Theatre.Management.API.service.impl;
 
 import com.mtm.Movie.Theatre.Management.API.dto.request.MovieRequestDto;
 import com.mtm.Movie.Theatre.Management.API.dto.response.MovieResponseDto;
+import com.mtm.Movie.Theatre.Management.API.exception.AccessDeniedException;
 import com.mtm.Movie.Theatre.Management.API.exception.MovieNotFoundException;
 import com.mtm.Movie.Theatre.Management.API.mapper.MovieMapper;
 import com.mtm.Movie.Theatre.Management.API.model.Movie;
@@ -12,6 +13,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,11 +26,31 @@ public class MovieServiceImpl implements MovieService {
 
     private final MovieMapper movieMapper;
 
-
     @Override
     public MovieResponseDto saveMovie(MovieRequestDto dto) {
         Movie movie = movieMapper.fromDto(dto);
         return movieMapper.fromMovie(movieRepository.save(movie));
+    }
+
+    @Override
+    public ResponseEntity<MovieResponseDto> getMovieById(String id) {
+        return movieRepository.findById(id)
+                .map(movie -> ResponseEntity.ok(movieMapper.fromMovie(movie)))
+                .orElseThrow(() -> new MovieNotFoundException("movie not found"));
+    }
+
+    @Override
+    public ResponseEntity<MovieResponseDto> updateMovie(String id, MovieRequestDto dto) {
+                return movieRepository.findById(id)
+                .map(existing -> {
+                    existing.setTitle(dto.getTitle());
+                    existing.setGenre(dto.getGenre());
+                    existing.setDuration(dto.getDuration());
+                    existing.setReleaseDate(dto.getReleaseDate());
+                    return ResponseEntity.ok(movieMapper.fromMovie(movieRepository.save(existing)));
+                })
+
+                .orElseThrow(() -> new MovieNotFoundException("movie not found"));
     }
 
     @Override
@@ -43,26 +65,6 @@ public class MovieServiceImpl implements MovieService {
         return movieMapper.toDtoList(movieRepository.findAll());
     }
 
-    @Override
-    public ResponseEntity<MovieResponseDto> getMovieById(String id) {
-        return movieRepository.findById(id)
-                .map(movie -> ResponseEntity.ok(movieMapper.fromMovie(movie)))
-                .orElseThrow(() -> new MovieNotFoundException("movie not found"));
-    }
-
-    @Override
-    public ResponseEntity<MovieResponseDto> updateMovie(String id, MovieRequestDto dto) {
-        return movieRepository.findById(id)
-                .map(existing -> {
-                    existing.setTitle(dto.getTitle());
-                    existing.setGenre(dto.getGenre());
-                    existing.setDuration(dto.getDuration());
-                    existing.setReleaseDate(dto.getReleaseDate());
-                    return ResponseEntity.ok(movieMapper.fromMovie(movieRepository.save(existing)));
-                })
-
-                .orElseThrow(() -> new MovieNotFoundException("movie not found"));
-    }
 
     @Override
     public ResponseEntity<Object> deleteMovie(String id) {

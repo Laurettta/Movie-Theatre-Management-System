@@ -48,4 +48,10 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
         ErrorResponseDto responseDto = new ErrorResponseDto(exception.getMessage(), String.format("Path is %s", request.getDescription(false)), LocalDateTime.now());
         return new ResponseEntity<>(responseDto, HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(AccessDeniedException.class)
+    public final ResponseEntity<Object> handleAccessDeniedException(AccessDeniedException exception, WebRequest request){
+        ErrorResponseDto responseDto = new ErrorResponseDto(exception.getMessage(), String.format("Path is %s", request.getDescription(false)), LocalDateTime.now());
+        return new ResponseEntity<>(responseDto, HttpStatus.UNAUTHORIZED);
+    }
 }

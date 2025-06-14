@@ -2,6 +2,7 @@ package com.mtm.Movie.Theatre.Management.API.service.impl;
 
 import com.mtm.Movie.Theatre.Management.API.dto.request.TheatreRequestDto;
 import com.mtm.Movie.Theatre.Management.API.dto.response.TheatreResponseDto;
+import com.mtm.Movie.Theatre.Management.API.exception.AccessDeniedException;
 import com.mtm.Movie.Theatre.Management.API.exception.TheatreNotFoundException;
 import com.mtm.Movie.Theatre.Management.API.mapper.TheatreMapper;
 import com.mtm.Movie.Theatre.Management.API.model.Theatre;
@@ -9,6 +10,8 @@ import com.mtm.Movie.Theatre.Management.API.repository.TheatreRepository;
 import com.mtm.Movie.Theatre.Management.API.service.TheatreService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,11 +21,7 @@ import java.util.List;
 public class TheatreServiceImpl implements TheatreService {
 
     private final TheatreRepository theatreRepository;
-
     private final TheatreMapper theatreMapper;
-
-//    constructor, field, setter
-
 
 
     @Override
@@ -36,12 +35,14 @@ public class TheatreServiceImpl implements TheatreService {
         return theatreMapper.toDtoList(theatreRepository.findAll());
     }
 
+
     @Override
     public ResponseEntity<TheatreResponseDto> getTheatreById(String id) {
         return theatreRepository.findById(id)
                 .map(theatre -> ResponseEntity.ok(theatreMapper.fromTheatre(theatre)))
                 .orElseThrow(() -> new TheatreNotFoundException("Theatre not found"));
     }
+
 
     @Override
     public ResponseEntity<TheatreResponseDto> updateTheatre(String id, TheatreRequestDto dto) {
@@ -56,6 +57,7 @@ public class TheatreServiceImpl implements TheatreService {
                 })
                 .orElseThrow(()-> new TheatreNotFoundException("Theatre not found"));
     }
+
 
     @Override
     public ResponseEntity<Object> deleteTheatre(String id) {

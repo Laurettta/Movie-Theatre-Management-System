@@ -10,6 +10,8 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.http.ResponseEntity;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -30,8 +32,8 @@ class MovieControllerTest {
     void setUp() {
         MockitoAnnotations.openMocks(this);
 
-        movieRequestDto = new MovieRequestDto("Wrong turn", "Horror", 180, "2025-05-05T12:00");
-        movieResponseDto = new MovieResponseDto("1", "Wrong turn", "180", 180, "2025-05-05T12:00");
+        movieRequestDto = new MovieRequestDto("Wrong turn", "Horror", 180, LocalDate.parse("2025-05-05"));
+        movieResponseDto = new MovieResponseDto("1", "Wrong turn", "180", 180, LocalDate.parse ("2025-05-05T12:00"));
     }
 
     @Test

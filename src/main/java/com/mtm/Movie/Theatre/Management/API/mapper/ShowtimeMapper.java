@@ -5,6 +5,7 @@ import com.mtm.Movie.Theatre.Management.API.dto.response.ShowtimeResponseDto;
 import com.mtm.Movie.Theatre.Management.API.model.Showtime;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 @Component
@@ -20,7 +21,7 @@ public class ShowtimeMapper {
 
     public ShowtimeResponseDto fromShowtime(Showtime showtime){
         return ShowtimeResponseDto.builder()
-                .showtime(showtime.getId())
+                .showtime(showtime.getShowtime())
                 .movieId(showtime.getMovieId())
                 .theatreId(showtime.getTheatreId())
                 .build();
@@ -32,7 +33,7 @@ public class ShowtimeMapper {
             ShowtimeResponseDto s = ShowtimeResponseDto.builder()
                     .theatreId(showtime.getTheatreId())
                     .movieId(showtime.getMovieId())
-                    .showtime(showtime.getId())
+                    .showtime(showtime.getShowtime())
                     .build();
             response.add(s);
         }
