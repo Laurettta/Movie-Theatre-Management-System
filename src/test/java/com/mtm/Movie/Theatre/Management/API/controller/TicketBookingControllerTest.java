@@ -10,6 +10,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.http.ResponseEntity;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -31,8 +32,8 @@ public class TicketBookingControllerTest {
     void setUp() {
         MockitoAnnotations.openMocks(this);
 
-        requestDto = new TicketBookingRequestDto("user123", "show123", 2, "2025-04-21");
-        responseDto = new TicketBookingResponseDto("bookingId1", "user123", "show123", 2, "2025-04-21");
+        requestDto = new TicketBookingRequestDto("user123", "show123", 2, LocalDateTime.parse("2025-04-21T18:30"));
+        responseDto = new TicketBookingResponseDto("bookingId1", "user123", "show123", 2, LocalDateTime.parse( "2025-04-21T20:00"));
     }
 
     @Test

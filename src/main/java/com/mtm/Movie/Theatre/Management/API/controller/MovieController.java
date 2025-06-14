@@ -19,11 +19,13 @@ public class MovieController {
 
     private final MovieService movieService;
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
     public MovieResponseDto saveMovie(@Valid @RequestBody MovieRequestDto dto){
         return movieService.saveMovie(dto);
     }
 
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     @GetMapping
     public List<MovieResponseDto> getAllMovies(){
         return movieService.getAllMovies();
@@ -55,7 +57,7 @@ public class MovieController {
     }
 
 
-//    @PreAuthorize("hasRole('ADMIN')")
-//    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
+
+
 //    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 }

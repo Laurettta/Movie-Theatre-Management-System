@@ -23,20 +23,19 @@ public class TheatreServiceImpl implements TheatreService {
     private final TheatreRepository theatreRepository;
     private final TheatreMapper theatreMapper;
 
-    @PreAuthorize("hasRole('ADMIN')")
+
     @Override
     public TheatreResponseDto saveTheatre(TheatreRequestDto theatredto) {
         Theatre theatre = theatreMapper.fromDto(theatredto);
         return theatreMapper.fromTheatre(theatreRepository.save(theatre));
     }
 
-    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     @Override
     public List<TheatreResponseDto> getAllTheatres() {
         return theatreMapper.toDtoList(theatreRepository.findAll());
     }
 
-    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
+
     @Override
     public ResponseEntity<TheatreResponseDto> getTheatreById(String id) {
         return theatreRepository.findById(id)
@@ -44,7 +43,7 @@ public class TheatreServiceImpl implements TheatreService {
                 .orElseThrow(() -> new TheatreNotFoundException("Theatre not found"));
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+
     @Override
     public ResponseEntity<TheatreResponseDto> updateTheatre(String id, TheatreRequestDto dto) {
         return theatreRepository.findById(id)
@@ -59,7 +58,7 @@ public class TheatreServiceImpl implements TheatreService {
                 .orElseThrow(()-> new TheatreNotFoundException("Theatre not found"));
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+
     @Override
     public ResponseEntity<Object> deleteTheatre(String id) {
         return theatreRepository.findById(id)

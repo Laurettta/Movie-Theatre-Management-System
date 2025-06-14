@@ -23,7 +23,6 @@ public class ShowtimeServiceImpl implements ShowtimeService {
     private final ShowtimeRepository showtimeRepository;
     private final ShowtimeMapper showtimeMapper;
 
-    @PreAuthorize("hasRole('ADMIN')")
     @Override
     public ShowtimeResponseDto saveShowtime(ShowtimeRequestDto dto)
     {
@@ -31,21 +30,20 @@ public class ShowtimeServiceImpl implements ShowtimeService {
         return showtimeMapper.fromShowtime(showtimeRepository.save(showtime));
     }
 
-    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     @Override
     public ResponseEntity<List<ShowtimeResponseDto>> getShowtimeByMovieId(String movieId) {
         List<Showtime> showtime = showtimeRepository.findByMovieId(movieId);
         return ResponseEntity.ok(showtimeMapper.toDtoList(showtime));
     }
 
-    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
+
     @Override
     public ResponseEntity<List<ShowtimeResponseDto>> getShowtimeByTheatre(String theatreId) {
         List<Showtime> showtime = showtimeRepository.findByTheatreId(theatreId);
                 return ResponseEntity.ok(showtimeMapper.toDtoList(showtime));
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+
     @Override
     public ResponseEntity<Object> deleteShowtimeById(String id) {
         return showtimeRepository.findById(id)

@@ -17,21 +17,25 @@ public class TicketBookingController {
 
     private final TicketBookingService ticketBookingService;
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/save")
     public TicketBookingResponseDto saveBookings(@Valid @RequestBody TicketBookingRequestDto dto){
         return ticketBookingService.saveBookings(dto);
     }
 
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     @GetMapping("/all")
     public List<TicketBookingResponseDto> getAllBookings(){
         return ticketBookingService.getAllBookings();
     }
 
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     @GetMapping("/user/{userId}")
     public ResponseEntity<List<TicketBookingResponseDto>> getBookingsByUserId (@PathVariable String userId){
         return ticketBookingService.getBookingsByUserId(userId);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> deleteBooking(@PathVariable String id){
         return ticketBookingService.deleteBookings(id);

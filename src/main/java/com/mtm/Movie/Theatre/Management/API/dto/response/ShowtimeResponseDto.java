@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -14,5 +16,5 @@ public class ShowtimeResponseDto {
     private String id;
     private String movieId;
     private String theatreId;
-    private String showtime;
+    private LocalDateTime showtime;
 }

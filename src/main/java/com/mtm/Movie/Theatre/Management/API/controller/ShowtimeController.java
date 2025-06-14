@@ -18,21 +18,25 @@ public class ShowtimeController {
 
     private final ShowtimeService showtimeService;
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/save")
     public ShowtimeResponseDto saveShowtime(@Valid @RequestBody ShowtimeRequestDto dto){
         return showtimeService.saveShowtime(dto);
     }
 
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     @GetMapping("/movie/{movieId}")
     public ResponseEntity<List<ShowtimeResponseDto>> getShowtimeMovie(@PathVariable String movieId){
         return showtimeService.getShowtimeByMovieId(movieId);
     }
 
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     @GetMapping("/theatre/{theatreId}")
     public ResponseEntity<List<ShowtimeResponseDto>> getShowtimeByTheatre(@PathVariable String theatreId){
         return showtimeService.getShowtimeByTheatre(theatreId);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> deleteShowtime(@PathVariable String id){
         return showtimeService.deleteShowtimeById(id);

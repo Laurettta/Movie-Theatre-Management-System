@@ -18,28 +18,32 @@ public class TheatreController {
 
     private final TheatreService theatreService;
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/save")
     public TheatreResponseDto saveTheatre(@Valid @RequestBody TheatreRequestDto dto) {
         return theatreService.saveTheatre(dto);
     }
 
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     @GetMapping("/all")
     public List<TheatreResponseDto> getAllTheatres(){
         return theatreService.getAllTheatres();
     }
 
-
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     @GetMapping("/{id}")
     public ResponseEntity<TheatreResponseDto> getTheatreById(@PathVariable String id){
         return theatreService.getTheatreById(id);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/{id}")
     public ResponseEntity<TheatreResponseDto> updateTheatre(@PathVariable String id,
                                                  @RequestBody TheatreRequestDto dto){
         return theatreService.updateTheatre(id,dto);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> deleteTheatre(@PathVariable String id){
         return theatreService.deleteTheatre(id);

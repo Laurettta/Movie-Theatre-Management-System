@@ -10,6 +10,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.http.ResponseEntity;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -30,8 +31,8 @@ public class ShowtimeControllerTest {
     void setUp() {
         MockitoAnnotations.openMocks(this);
 
-        showtimeRequestDto = new ShowtimeRequestDto("Movie1", "Theatre1", "2025-05-05T14:00");
-        showtimeResponseDto = new ShowtimeResponseDto("1", "Movie1", "Theatre1", "2025-05-05T14:00");
+        showtimeRequestDto = new ShowtimeRequestDto("Movie1", "Theatre1", LocalDateTime.parse("2025-05-05T14:00"));
+        showtimeResponseDto = new ShowtimeResponseDto("1", "Movie1", "Theatre1", LocalDateTime.parse("2025-05-05T14:00"));
     }
 
     @Test

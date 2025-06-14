@@ -6,6 +6,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -21,5 +24,5 @@ public class TicketBookingRequestDto {
     private int seats;
 
     @NotBlank(message = "bookingDate cannot be empty")
-    private String bookingDate;
+    private LocalDateTime bookingDate;
 }

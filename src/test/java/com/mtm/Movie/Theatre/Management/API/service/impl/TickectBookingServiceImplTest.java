@@ -13,6 +13,8 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.http.ResponseEntity;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -41,9 +43,9 @@ public class TickectBookingServiceImplTest {
     void setUp() {
         MockitoAnnotations.openMocks(this);
 
-        ticketBooking = new TicketBooking("1", "user123", "showtimeId456", 3, "2025-05-05T14:30:00");
-        requestDto = new TicketBookingRequestDto("user123", "showtimeId456", 3, "2025-05-05T14:30:00");
-        responseDto = new TicketBookingResponseDto("1", "user123", "showtimeId456", 3, "2025-05-05T14:30:00");
+        ticketBooking = new TicketBooking("1", "user123", "showtimeId456", 3, LocalDateTime.parse("2025-05-05T14:30:00"));
+        requestDto = new TicketBookingRequestDto("user123", "showtimeId456", 3, LocalDateTime.parse("2025-05-05T14:30:00"));
+        responseDto = new TicketBookingResponseDto("1", "user123", "showtimeId456", 3, LocalDateTime.parse("2025-05-05T14:30:00"));
     }
 
     @Test

@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -17,6 +19,5 @@ public class ShowtimeRequestDto {
     private String theatreId;
 
     @NotBlank(message = "showtime cannot be empty")
-    private String showtime;
-
+    private LocalDateTime showtime;
 }
