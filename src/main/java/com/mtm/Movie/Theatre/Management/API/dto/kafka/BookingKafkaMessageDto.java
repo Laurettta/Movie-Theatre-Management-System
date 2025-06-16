@@ -1,26 +1,22 @@
-package com.mtm.Movie.Theatre.Management.API.model;
+package com.mtm.Movie.Theatre.Management.API.dto.kafka;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Document
 @Builder
-public class TicketBooking {
+public class BookingKafkaMessageDto {
 
-    @Id
-    private String id;
+    private String bookingId;
     private String userId;
+    private String movieId;
     private String showtimeId;
     private int seats;
-    private String movieId;
     private LocalDateTime bookingDate;
 }

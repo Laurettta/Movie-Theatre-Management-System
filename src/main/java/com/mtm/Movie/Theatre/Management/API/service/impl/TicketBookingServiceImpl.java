@@ -52,6 +52,7 @@ public class TicketBookingServiceImpl implements TicketBookingService {
             showtimeRepository.save(showtime);
 
         TicketBooking ticketBooking = ticketBookingMapper.fromDto(dto);
+        ticketBooking.setMovieId(showtime.getMovieId());
         return ticketBookingMapper.fromTicketBooking(ticketBookingRepository.save(ticketBooking));
 
     } finally {
