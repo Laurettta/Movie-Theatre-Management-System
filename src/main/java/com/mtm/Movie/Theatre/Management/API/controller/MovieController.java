@@ -56,8 +56,4 @@ public class MovieController {
         return movieService.deleteMovie(id);
     }
 
-
-
-
-//    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 }
