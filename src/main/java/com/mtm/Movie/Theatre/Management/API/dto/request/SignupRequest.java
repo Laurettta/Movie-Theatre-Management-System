@@ -3,13 +3,10 @@ package com.mtm.Movie.Theatre.Management.API.dto.request;
 import com.mtm.Movie.Theatre.Management.API.enums.UserType;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Null;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.Set;
 
 @Data
 @AllArgsConstructor

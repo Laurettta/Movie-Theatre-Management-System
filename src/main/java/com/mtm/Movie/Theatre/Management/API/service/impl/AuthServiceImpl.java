@@ -61,6 +61,14 @@ public class AuthServiceImpl implements  AuthService {
             user.setRole(Role.USER);
         }
 
+        if (userRepository.findByUserName(signupRequest.getUserName()).isPresent()) {
+            throw new BadRequestException("Username is already taken");
+        }
+
+        if (userRepository.findByEmail(signupRequest.getEmail()).isPresent()) {
+            throw new BadRequestException("Email is already in use");
+        }
+
         userRepository.save(user);
         return ApiResponse.ok("signup successful");
     }

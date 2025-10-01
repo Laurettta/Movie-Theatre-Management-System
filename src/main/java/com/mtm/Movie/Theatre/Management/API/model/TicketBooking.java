@@ -22,5 +22,5 @@ public class TicketBooking {
     private String showtimeId;
     private int seats;
     private String movieId;
-    private LocalDateTime bookingDate;
+    private LocalDateTime bookingDate = LocalDateTime.now();
 }

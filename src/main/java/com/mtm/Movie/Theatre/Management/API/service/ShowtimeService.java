@@ -14,4 +14,6 @@ public interface ShowtimeService {
     ResponseEntity<List<ShowtimeResponseDto>> getShowtimeByTheatre(String theatreId);
 
     ResponseEntity<Object> deleteShowtimeById(String id);
+
+    List<ShowtimeResponseDto> getAllShowtimes();
 }
