@@ -36,6 +36,13 @@ public class ShowtimeController {
         return showtimeService.getShowtimeByTheatre(theatreId);
     }
 
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
+    @GetMapping("/all")
+    public List<ShowtimeResponseDto> getAllShowtimes() {
+        return showtimeService.getAllShowtimes();
+    }
+
+
     @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> deleteShowtime(@PathVariable String id){

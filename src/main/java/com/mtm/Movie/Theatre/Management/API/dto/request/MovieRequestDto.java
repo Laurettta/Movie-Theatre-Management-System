@@ -1,6 +1,7 @@
 package com.mtm.Movie.Theatre.Management.API.dto.request;
 
 import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,7 +24,7 @@ public class MovieRequestDto {
     @Min(value = 1, message = "Duration must be positive")
     private int duration;
 
-    @NotBlank(message = "Release date is required")
+    @NotNull(message = "Release date is required")
     private LocalDate releaseDate;
 
 }

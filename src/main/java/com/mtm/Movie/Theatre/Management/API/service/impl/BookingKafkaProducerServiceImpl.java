@@ -17,7 +17,7 @@ public class BookingKafkaProducerServiceImpl implements BookingKafkaProducerServ
     private String topic;
 
     @Override
-    public void sendBookingMessage(BookingKafkaMessageDto messageDto) {
+    public void sendBookingMessage(BookingKafkaMessageDto messageDto)                     {
         kafkaTemplate.send(topic, messageDto);
     }
 }

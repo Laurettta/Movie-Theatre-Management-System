@@ -12,7 +12,6 @@ import java.util.List;
 public class TicketBookingMapper {
     public TicketBooking fromDto(TicketBookingRequestDto dto){
         return TicketBooking.builder()
-                .bookingDate(dto.getBookingDate())
                 .seats(dto.getSeats())
                 .showtimeId(dto.getShowtimeId())
                 .userId(dto.getUserId())
